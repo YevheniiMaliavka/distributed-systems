@@ -1,6 +1,6 @@
-# AWS JavaScript Lambda
+# Web-Service with JAX-WS. First blood.
 
-> This is just a simple guide on how to create a basic SOA infrustructure using [Java API for XML Web-Service](https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services). This small tutorial is done as a part of a `Distributed Systems` project in the University of Applied Science Merseburg.
+> This is just a simple guide on how to create a basic SOA infrustructure using [Java API for XML Web-Service](https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services). This small tutorial is done as a part of a `Distributed Systems` project in the University of Applied Science Merseburg, is only for educational and version control purposes here. It does not implement best-practices and may contain mistakes.
 
 # Quick Dive-In
 
@@ -196,7 +196,7 @@ Our project tree looks like following now:
 
 ![Project Tree](/images/project-structure-release.png)
 
->Note: To get full description on what this or that configuration file means, read the official oracle docs on [Packaging and Deploying Web Services](https://docs.oracle.com/cd/E16439_01/doc.1013/e13982/wsdeployment.htm).
+>Note: To get full description on what this or that configuration file means, read the official oracle docs on [Packaging and Deploying Web Services](https://docs.oracle.com/cd/E16439_01/doc.1013/e13982/wsdeployment.htm) and [Creating a Web Service](https://docs.oracle.com/cd/E17802_01/webservices/webservices/reference/tutorials/wsit/doc/Examples_glassfish4.html#wp104810).
 
 ### Generate the artifact
 Just navigate to Build -> Build Artifacts... -> app -> Build Artifact.
@@ -204,6 +204,32 @@ Just navigate to Build -> Build Artifacts... -> app -> Build Artifact.
 This will trigger the project build and generate an `out/` directory. Our deployment artifact can be found under `/out/artifacts/app/app.war`. 
 
 ## Local Deployment
+Our deployment package will be running on a [GlassFish Application Server](https://en.wikipedia.org/wiki/GlassFish) for the Java EE platform.
+
+### Prerequisites
+1. Download the GlassFish 5 for Linux [here](https://javaee.github.io/glassfish/download). There are two possibilities, namely Web-Profile and Full-Platform. The first one should be sufficient for this tutorial, however I have used the Full-Platform.
+2. Unzip the archive.
+3. Navigate in terminal to the unzipped dir, e.g.`/glassfish5/bin`, where you can find the `asadmin` shell script. This one is used to start and control the server.
+
+### Deployment
+1. Start the default domain `domain1`
+```sh
+$ ./asadmin start-domain domain1
+```
+2. Run deployment command
+```sh
+./asadmin deploy ~/src/distributed-systems/MyWebService/out/artifacts/app/app.war 
+```
+### This should look like following: 
+![Deployment](/images/deployment.png)
+
+### Now our application is deployed and is accessible at `http://localhost:8080/app/services/MyWebService`
+![Deployed](/images/deployed.png)
+
+>Note: You can also perform the deployment using the GUI in browser by accessing the GlassFish Admin Console at `http://localhost:4848/`
+![GUI](/images/gui-deployment.png).
+
+You can read more about GlassFish Deployment [using terminal](https://dzone.com/articles/how-deploy-war-file-using) or [using GUI](https://blog.idrsolutions.com/2013/08/creating-and-deploying-a-java-web-service/).
 
 ## Test
 
