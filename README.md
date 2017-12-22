@@ -1,12 +1,12 @@
-# Web-Service with JAX-WS. First blood.
+# Web-Service with JAX-WS. First blood
 
 > This is just a simple guide on how to create a basic SOA infrustructure (Web Service and Web Service Client) using [Java API for XML Web-Service](https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services). This small tutorial is done as a part of a `Distributed Systems` project in the University of Applied Science Merseburg, is only for educational and version control purposes here. It does not implement best-practices and may contain mistakes.
 
-# Quick Dive-In
+## Quick Dive-In
 
 If you just want to have all the things here on your local machine running, try out instructions in this section and skip the other.
 
-# Intro
+## Intro
 
 The aim of this small basic tutorial is to learn the essential parts of the Web-Services in practice.
 
@@ -35,15 +35,15 @@ Personal recommendation: I really recommend to take a look at [this tutorial for
 
 I will use [Unix Bash](<https://en.wikipedia.org/wiki/Bash_(Unix_shell)>) and [IntelliJ IDEA Ultimate Edition (Trial)](https://www.jetbrains.com/idea/) throughout this tutorial.
 
-# Step by step guide
+## Step by step guide
 
 ## Initial steps
 
 Make sure you have JDK installed:
 
 ```sh
-$ sudo apt-get install openjdk-8-jdk
-$ java -version
+$sudo apt-get install openjdk-8-jdk
+$java -version
 ```
 
 If you experience any problems, try out [this](https://tecadmin.net/install-oracle-java-8-ubuntu-via-ppa/) tutorial.
@@ -53,20 +53,20 @@ If you experience any problems, try out [this](https://tecadmin.net/install-orac
 ### Create a project
 
 1. Start the IntelliJ IDEA and open the create a new project.
-2. Search for `JAVA EE`and check `WebServices`. Uncheck `Generate sample code`.
-   ![New Project](/images/new-project.png).
-3. Click `Next` and give a name to your project, say `MyWebService` and click `Finish`.
-   You should have the following ![Project Structure Tree](/images/project-structure.png).
+1. Search for `JAVA EE`and check `WebServices`. Uncheck `Generate sample code`.
+   ![New Project](/images/new-project.png)
+1. Click `Next` and give a name to your project, say `MyWebService` and click `Finish`.
+   You should have the following ![Project Structure Tree](/images/project-structure.png)
 
 ### Implement a Web Service
 
-To start with, click on the `src` directory and create a new package named `ws`: go File -> New -> Package.
+To start with, click on the `src` directory and create a new package named `ws`: go `File -> New -> Package`.
 
-### 1. Create a Service Endpoint Interface (SEI).
+### 1. Create a Service Endpoint Interface (SEI)
 
 This is a Java Interface that exposes the Service interface's operations. This SEI is used by the clients to communicate with a Web-Service.
 
-Click on the `src` directory, go File -> New -> Java Class. In the modal window enter `MyWebService` and select `Interface` kind.
+Click on the `src` directory, go `File -> New -> Java Class`. In the modal window enter `MyWebService` and select `Interface` kind.
 
 We are going to expose 3 functions. For the sake of understanding and implementing the SOA Infrustructe, we'll create simple functions:
 
@@ -101,7 +101,7 @@ public interface MyWebService {
 
 Now its time to provide actual implementation of the exposed Web-Service operations.
 
-Click on the `src` directory, go File -> New -> Java Class. In the modal window enter `MyWebServiceImpl`. This class is our SIB.
+Click on the `src` directory, go `File -> New -> Java Class`. In the modal window enter `MyWebServiceImpl`. This class is our SIB.
 
 We should now connect the newly created SIB to the SEI. This is done by the following annotation.
 
@@ -145,7 +145,7 @@ public class MyWebServiceImpl implements MyWebService {
 
 We don't want to stick to any IDE specific local deployment logic, like IntelliJ IDEA, NetBeans or Eclipse. We want to have a single piece of data, say a container with our WebService, being ready to deploy anywhere.
 
-### What is an artifact?
+### What is an artifact
 
 > An artifact is an assembly of your project assets that you put together to test, deploy or distribute your software solution or its part. Examples are a collection of compiled Java classes or a Java application packaged in a Java archive, a Web application as a directory structure or a Web application archive, etc.
 > More information about artifacts you can find [here](https://www.jetbrains.com/help/idea/working-with-artifacts.html).
@@ -208,7 +208,7 @@ Our project tree looks like following now:
 
 ### Generate the artifact
 
-Just navigate to Build -> Build Artifacts... -> app -> Build Artifact.
+Just navigate to `Build -> Build Artifacts... -> app -> Build Artifact`.
 
 This will trigger the project build and generate an `out/` directory. Our deployment artifact can be found under `/out/artifacts/app/app.war`.
 
@@ -216,31 +216,31 @@ This will trigger the project build and generate an `out/` directory. Our deploy
 
 Our deployment package will be running on a [GlassFish Application Server](https://en.wikipedia.org/wiki/GlassFish) for the Java EE platform.
 
-### Prerequisites
+### Server Setup
 
 1. Download the GlassFish 5 for Linux [here](https://javaee.github.io/glassfish/download). There are two possibilities, namely Web-Profile and Full-Platform. The first one should be sufficient for this tutorial, however I have used the Full-Platform.
-2. Unzip the archive.
-3. Navigate in terminal to the unzipped dir, e.g.`/glassfish5/bin`, where you can find the `asadmin` shell script. This one is used to start and control the server.
+1. Unzip the archive.
+1. Navigate in terminal to the unzipped dir, e.g.`/glassfish5/bin`, where you can find the `asadmin` shell script. This one is used to start and control the server.
 
 ### Deployment
 
 1. Start the default domain `domain1`
 
 ```sh
-$ ./asadmin start-domain domain1
+./asadmin start-domain domain1
 ```
 
-2. Run deployment command
+1. Run deployment command
 
 ```sh
 ./asadmin deploy ~/src/distributed-systems/MyWebService/out/artifacts/app/app.war
 ```
 
-### This should look like following:
+#### This should look like following
 
 ![Deployment](/images/deployment.png)
 
-### Now our application is deployed!
+#### Try out deployed app
 
 You can access it at `http://localhost:8080/app/services/MyWebService`.
 ![Deployed](/images/deployed.png)
@@ -248,11 +248,11 @@ You can access it at `http://localhost:8080/app/services/MyWebService`.
 #### GUI Deployment
 
 You can also perform the deployment using the GUI in browser by accessing the GlassFish Admin Console at `http://localhost:4848/`
-![GUI](/images/gui-deployment.png).
+![GUI](/images/gui-deployment.png)
 
 You can read more about GlassFish Deployment [using terminal](https://dzone.com/articles/how-deploy-war-file-using) or [using GUI](https://blog.idrsolutions.com/2013/08/creating-and-deploying-a-java-web-service/).
 
-# Consume Web-Service
+## Consume Web-Service
 
 We have our Web-Service running and want to have a client that consumes its functionality. Still, we don't have any functionality our Web-Service could offer.
 Let's implement our stub methods of the Web-Service:
@@ -339,17 +339,17 @@ I have implemented a basic Java Client that does not provide any GUI interaction
 * to simplify the project structure and make program behaviour obvious.
 * many ways of developing a MVC Web-App in Java confuse me as a non-Java developer. The opportunity to hardcode something doesn't make me happy.
 
-### Create a project
+### Instantiate a project
 
 1. Make sure your GlassFish server is running and executing our Web-Service App.
-2. Create a new Web-Services Client Project.
+1. Create a new Web-Services Client Project.
    ![ws-client-project](/images/web-services-client.png)
-3. IntelliJ IDEA will offer you to generate Java code from the WSDL. Fill in the fields correctly as shown and click `Ok`:
+1. IntelliJ IDEA will offer you to generate Java code from the WSDL. Fill in the fields correctly as shown and click `Ok`:
    ![WSDL](/images/wsdl-gen.png)
 
 > Note: we will also try out another way of generating the Java code from the WSDL that is not IDE specific and uses the default JDK `wsimport` tool.
 
-4. The previous actions would trigger IntelliJ IDEA to generate some code for us:
+1. The previous actions would trigger IntelliJ IDEA to generate some code for us:
 
 ```java
 package example;
@@ -372,7 +372,7 @@ We should adjust our project structure to look like folllowing:
 
 Let's implement the consuming functions.
 
-#### luhnChecksum
+#### luhnChecksum Implementation
 
 ```java
     static void checksumTest(ws.MyWebService service) throws Exception {
@@ -397,7 +397,7 @@ Let's implement the consuming functions.
 }
 ```
 
-#### isPalindrome
+#### isPalindrome Implementation
 
 ```java
     static void palindromeTest(ws.MyWebService service) throws Exception {
@@ -419,7 +419,9 @@ Let's implement the consuming functions.
     }
 }
 ```
-#### Quadratic Equation Solver
+
+#### Quadratic Equation Solver Implementation
+
 ```java
     static <T> boolean equal(List<T> a, List<T> b){
         if(a.size() != b.size()){
@@ -449,7 +451,9 @@ Let's implement the consuming functions.
 ```
 
 ### Main method
+
 Our main method will trigger each function and catch any exceptions.
+
 ```java
     public static void main(String[] argv) {
         ws.MyWebService service = new ws.MyWebServiceImplService().getPort(MyWebService.class);
@@ -471,7 +475,14 @@ Our main method will trigger each function and catch any exceptions.
 ```
 
 ## Test
+
 Having everything set-up, we just run our client and expect to see the following output:
 ![Test](/images/final-test.png)
 
-# Outro
+## Outro
+
+We are done here. We've got our simple Web-Service consumed by a Client using the SOAP with a Service Provider and Service Consumer.
+
+This guide was intended for my better understanding and is not to supposed to be the `to follow` one. 
+
+If you've found some mistakes, got some ideas or suggestions on how to improve this simple guide, you are very welcome to make a PR or create an issue.
