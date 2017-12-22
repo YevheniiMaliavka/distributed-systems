@@ -14,12 +14,12 @@ The aim of this small basic tutorial is to learn the essential parts of the Web-
 
 We will do the following things:
 
-* Create a simple Web-Service that offers 3 functions.
-* Create a deployment artefact.
-* Install a Glassfish Server and make a basic setup.
-* Deploy our deployment artefact locally.
-* Create a client and bind it to a web-service consuming its functionality.
-* Write a simple test in order to test the system as a whole.
+1. Create a simple Web-Service that offers 3 functions
+2. Create a deployment artefact.
+3. Install a Glassfish Server and make a basic setup.
+4. Deploy our deployment artefact locally.
+5. Create a client and bind it to a web-service consuming its functionality.
+6. Write a simple test in order to test the system as a whole.
 
 ## Prerequisites
 
@@ -219,18 +219,18 @@ Our deployment package will be running on a [GlassFish Application Server](https
 ### Server Setup
 
 1. Download the GlassFish 5 for Linux [here](https://javaee.github.io/glassfish/download). There are two possibilities, namely Web-Profile and Full-Platform. The first one should be sufficient for this tutorial, however I have used the Full-Platform.
-1. Unzip the archive.
-1. Navigate in terminal to the unzipped dir, e.g.`/glassfish5/bin`, where you can find the `asadmin` shell script. This one is used to start and control the server.
+2. Unzip the archive.
+3. Navigate in terminal to the unzipped dir, e.g.`/glassfish5/bin`, where you can find the `asadmin` shell script. This one is used to start and control the server.
 
 ### Deployment
 
-1. Start the default domain `domain1`
+4. Start the default domain `domain1`
 
 ```sh
 ./asadmin start-domain domain1
 ```
 
-1. Run deployment command
+5. Run deployment command
 
 ```sh
 ./asadmin deploy ~/src/distributed-systems/MyWebService/out/artifacts/app/app.war
