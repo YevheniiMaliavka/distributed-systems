@@ -2,44 +2,44 @@
 
 > This is just a simple guide on how to create a basic SOAP Web-Services infrustructure (Web Service and Web Service Client) using [Java API for XML Web-Service](https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services). This small tutorial is done as a part of a `Distributed Systems` project in the University of Applied Science Merseburg, is only for educational and version control purposes here. It does not implement best-practices and may contain mistakes.
 
-- [Web-Service with JAX-WS. First blood](#web-service-with-jax-ws-first-blood)
-    - [Quick Dive-In](#quick-dive-in)
-    - [Intro](#intro)
-    - [What we are going to do](#what-we-are-going-to-do)
-    - [Prerequisites](#prerequisites)
-        - [Knowledge](#knowledge)
-        - [Tools](#tools)
-    - [Step by step guide](#step-by-step-guide)
-    - [Initial steps](#initial-steps)
-    - [Create a simple Web-Service](#create-a-simple-web-service)
-        - [Create a project](#create-a-project)
-        - [Implement a Web Service](#implement-a-web-service)
-        - [1. Create a Service Endpoint Interface (SEI)](#1-create-a-service-endpoint-interface-sei)
-        - [2. Implement the Service Implementation Bean (SIB)](#2-implement-the-service-implementation-bean-sib)
-    - [Create a deployment artifact](#create-a-deployment-artifact)
-        - [What is an artifact](#what-is-an-artifact)
-        - [Configure the artifact](#configure-the-artifact)
-        - [Generate the artifact](#generate-the-artifact)
-    - [Local Deployment](#local-deployment)
-        - [Server Setup](#server-setup)
-        - [Deployment](#deployment)
-            - [This should look like following](#this-should-look-like-following)
-            - [Try out deployed app](#try-out-deployed-app)
-            - [GUI Deployment](#gui-deployment)
-    - [Consume Web-Service](#consume-web-service)
-        - [Implement Stub-Methods of the Web-Service](#implement-stub-methods-of-the-web-service)
-            - [luhnChecksum](#luhnchecksum)
-            - [isPalindrome](#ispalindrome)
-            - [Quadratic Equation Solver](#quadratic-equation-solver)
-        - [Create Client](#create-client)
-            - [Instantiate a project](#instantiate-a-project)
-            - [Consume and Test Web-Service functions](#consume-and-test-web-service-functions)
-                - [luhnChecksum Implementation](#luhnchecksum-implementation)
-                - [isPalindrome Implementation](#ispalindrome-implementation)
-                - [Quadratic Equation Solver Implementation](#quadratic-equation-solver-implementation)
-            - [Main method](#main-method)
-    - [Test](#test)
-    - [Outro](#outro)
+* [Web-Service with JAX-WS. First blood](#web-service-with-jax-ws-first-blood)
+  * [Quick Dive-In](#quick-dive-in)
+  * [Intro](#intro)
+  * [What we are going to do](#what-we-are-going-to-do)
+  * [Prerequisites](#prerequisites)
+    * [Knowledge](#knowledge)
+    * [Tools](#tools)
+  * [Step by step guide](#step-by-step-guide)
+  * [Initial steps](#initial-steps)
+  * [Create a simple Web-Service](#create-a-simple-web-service)
+    * [Create a project](#create-a-project)
+    * [Implement a Web Service](#implement-a-web-service)
+    * [1. Create a Service Endpoint Interface (SEI)](#1-create-a-service-endpoint-interface-sei)
+    * [2. Implement the Service Implementation Bean (SIB)](#2-implement-the-service-implementation-bean-sib)
+  * [Create a deployment artifact](#create-a-deployment-artifact)
+    * [What is an artifact](#what-is-an-artifact)
+    * [Configure the artifact](#configure-the-artifact)
+    * [Generate the artifact](#generate-the-artifact)
+  * [Local Deployment](#local-deployment)
+    * [Server Setup](#server-setup)
+    * [Deployment](#deployment)
+      * [This should look like following](#this-should-look-like-following)
+      * [Try out deployed app](#try-out-deployed-app)
+      * [GUI Deployment](#gui-deployment)
+  * [Consume Web-Service](#consume-web-service)
+    * [Implement Stub-Methods of the Web-Service](#implement-stub-methods-of-the-web-service)
+      * [luhnChecksum](#luhnchecksum)
+      * [isPalindrome](#ispalindrome)
+      * [Quadratic Equation Solver](#quadratic-equation-solver)
+    * [Create Client](#create-client)
+      * [Instantiate a project](#instantiate-a-project)
+      * [Consume and Test Web-Service functions](#consume-and-test-web-service-functions)
+        * [luhnChecksum Implementation](#luhnchecksum-implementation)
+        * [isPalindrome Implementation](#ispalindrome-implementation)
+        * [Quadratic Equation Solver Implementation](#quadratic-equation-solver-implementation)
+      * [Main method](#main-method)
+  * [Test](#test)
+  * [Outro](#outro)
 
 <!-- /TOC -->
 
@@ -55,12 +55,12 @@ The aim of this small basic tutorial is to learn the essential parts of the Web-
 
 We will do the following things:
 
-1. Create a simple Web-Service that offers 3 functions
-2. Create a deployment artefact.
-3. Install a Glassfish Server and make a basic setup.
-4. Deploy our deployment artefact locally.
-5. Create a client and bind it to a web-service consuming its functionality.
-6. Write a simple test in order to test the system as a whole.
+* Create a simple Web-Service that offers 3 functions
+* Create a deployment artefact.
+* Install a Glassfish Server and make a basic setup.
+* Deploy our deployment artefact locally.
+* Create a client and bind it to a web-service consuming its functionality.
+* Write a simple test in order to test the system as a whole.
 
 ## Prerequisites
 
@@ -93,9 +93,9 @@ If you experience any problems, try out [this](https://tecadmin.net/install-orac
 
 ### Create a project
 
-0. Start the IntelliJ IDEA and open the create a new project.
-1. Search for `JAVA EE`and check `WebServices`. Uncheck `Generate sample code`. ![New Project](/images/new-project.png)
-1. Click `Next` and give a name to your project, say `MyWebService` and click `Finish`.
+* Start the IntelliJ IDEA and open the create a new project.
+* Search for `JAVA EE`and check `WebServices`. Uncheck `Generate sample code`. ![New Project](/images/new-project.png)
+* Click `Next` and give a name to your project, say `MyWebService` and click `Finish`.
 
 You should have the following ![Project Structure Tree](/images/project-structure.png)
 
@@ -259,19 +259,19 @@ Our deployment package will be running on a [GlassFish Application Server](https
 
 ### Server Setup
 
-    0. Download the GlassFish 5 for Linux [here](https://javaee.github.io/glassfish/download). There are two possibilities, namely Web-Profile and Full-Platform. The first one should be sufficient for this tutorial, however I have used the Full-Platform.
-    1. Unzip the archive.
-    2. Navigate in terminal to the unzipped dir, e.g.`/glassfish5/bin`, where you can find the `asadmin` shell script. This one is used to start and control the server.
+* Download the GlassFish 5 for Linux [here](https://javaee.github.io/glassfish/download). There are two possibilities, namely Web-Profile and Full-Platform. The first one should be sufficient for this tutorial, however I have used the Full-Platform.
+* Unzip the archive.
+* Navigate in terminal to the unzipped dir, e.g.`/glassfish5/bin`, where you can find the `asadmin` shell script. This one is used to start and control the server.
 
 ### Deployment
 
-0. Start the default domain `domain1`
+* Start the default domain `domain1`
 
 ```sh
 ./asadmin start-domain domain1
 ```
 
-1. Run deployment command
+* Run deployment command
 
 ```sh
 ./asadmin deploy ~/src/distributed-systems/MyWebService/out/artifacts/app/app.war
@@ -382,14 +382,14 @@ I have implemented a basic Java Client that does not provide any GUI interaction
 
 #### Instantiate a project
 
-1. Make sure your GlassFish server is running and executing our Web-Service App.
-1. Create a new Web-Services Client Project. ![ws-client-project](/images/web-services-client.png)
-1. IntelliJ IDEA will offer you to generate Java code from the WSDL. Fill in the fields correctly as shown and click `Ok`:
+* Make sure your GlassFish server is running and executing our Web-Service App.
+* Create a new Web-Services Client Project. ![ws-client-project](/images/web-services-client.png)
+* IntelliJ IDEA will offer you to generate Java code from the WSDL. Fill in the fields correctly as shown and click `Ok`:
    ![WSDL](/images/wsdl-gen.png)
 
 > Note: we will also try out another way of generating the Java code from the WSDL that is not IDE specific and uses the default JDK `wsimport` tool.
 
-1. The previous actions would trigger IntelliJ IDEA to generate some code for us:
+* The previous actions would trigger IntelliJ IDEA to generate some code for us:
 
 ```java
 package example;
