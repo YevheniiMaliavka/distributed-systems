@@ -2,6 +2,47 @@
 
 > This is just a simple guide on how to create a basic SOAP Web-Services infrustructure (Web Service and Web Service Client) using [Java API for XML Web-Service](https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services). This small tutorial is done as a part of a `Distributed Systems` project in the University of Applied Science Merseburg, is only for educational and version control purposes here. It does not implement best-practices and may contain mistakes.
 
+* [Web-Service with JAX-WS. First blood](#web-service-with-jax-ws-first-blood)
+  * [Quick Dive-In](#quick-dive-in)
+  * [Intro](#intro)
+  * [What we are going to do](#what-we-are-going-to-do)
+  * [Prerequisites](#prerequisites)
+    * [Knowledge](#knowledge)
+    * [Tools](#tools)
+  * [Step by step guide](#step-by-step-guide)
+  * [Initial steps](#initial-steps)
+  * [Create a simple Web-Service](#create-a-simple-web-service)
+    * [Create a project](#create-a-project)
+    * [Implement a Web Service](#implement-a-web-service)
+    * [1. Create a Service Endpoint Interface (SEI)](#1-create-a-service-endpoint-interface-sei)
+    * [2. Implement the Service Implementation Bean (SIB)](#2-implement-the-service-implementation-bean-sib)
+  * [Create a deployment artifact](#create-a-deployment-artifact)
+    * [What is an artifact](#what-is-an-artifact)
+    * [Configure the artifact](#configure-the-artifact)
+    * [Generate the artifact](#generate-the-artifact)
+  * [Local Deployment](#local-deployment)
+    * [Server Setup](#server-setup)
+    * [Deployment](#deployment)
+      * [This should look like following](#this-should-look-like-following)
+      * [Try out deployed app](#try-out-deployed-app)
+      * [GUI Deployment](#gui-deployment)
+  * [Consume Web-Service](#consume-web-service)
+    * [Implement Stub-Methods of the Web-Service](#implement-stub-methods-of-the-web-service)
+      * [luhnChecksum](#luhnchecksum)
+      * [isPalindrome](#ispalindrome)
+      * [Quadratic Equation Solver](#quadratic-equation-solver)
+    * [Create Client](#create-client)
+      * [Instantiate a project](#instantiate-a-project)
+      * [Consume and Test Web-Service functions](#consume-and-test-web-service-functions)
+        * [luhnChecksum Implementation](#luhnchecksum-implementation)
+        * [isPalindrome Implementation](#ispalindrome-implementation)
+        * [Quadratic Equation Solver Implementation](#quadratic-equation-solver-implementation)
+      * [Main method](#main-method)
+  * [Test](#test)
+  * [Outro](#outro)
+
+<!-- /TOC -->
+
 ## Quick Dive-In
 
 If you just want to have all the things here on your local machine running, try out instructions in this section and skip the other.
@@ -54,7 +95,7 @@ If you experience any problems, try out [this](https://tecadmin.net/install-orac
 
 0. Start the IntelliJ IDEA and open the create a new project.
 1. Search for `JAVA EE`and check `WebServices`. Uncheck `Generate sample code`. ![New Project](/images/new-project.png)
-2. Click `Next` and give a name to your project, say `MyWebService` and click `Finish`.
+1. Click `Next` and give a name to your project, say `MyWebService` and click `Finish`.
 
 You should have the following ![Project Structure Tree](/images/project-structure.png)
 
@@ -257,9 +298,9 @@ You can read more about GlassFish Deployment [using terminal](https://dzone.com/
 We have our Web-Service running and want to have a client that consumes its functionality. Still, we don't have any functionality our Web-Service could offer.
 Let's implement our stub methods of the Web-Service:
 
-## Implement Stub-Methods of the Web-Service
+### Implement Stub-Methods of the Web-Service
 
-### luhnChecksum
+#### luhnChecksum
 
 ```java
     @Override
@@ -288,7 +329,7 @@ Let's implement our stub methods of the Web-Service:
     }
 ```
 
-### isPalindrome
+#### isPalindrome
 
 ```java
     @Override
@@ -311,7 +352,7 @@ Let's implement our stub methods of the Web-Service:
     }
 ```
 
-### Quadratic Equation Solver
+#### Quadratic Equation Solver
 
 ```java
     @Override
@@ -329,7 +370,7 @@ Let's implement our stub methods of the Web-Service:
     }
 ```
 
-## Create Client
+### Create Client
 
 I have implemented a basic Java Client that does not provide any GUI interaction and only shows console output for several reasons:
 
@@ -339,16 +380,16 @@ I have implemented a basic Java Client that does not provide any GUI interaction
 * to simplify the project structure and make program behaviour obvious.
 * many ways of developing a MVC Web-App in Java confuse me as a non-Java developer. The opportunity to hardcode something doesn't make me happy.
 
-### Instantiate a project
+#### Instantiate a project
 
 1. Make sure your GlassFish server is running and executing our Web-Service App.
-2. Create a new Web-Services Client Project. ![ws-client-project](/images/web-services-client.png)
-3. IntelliJ IDEA will offer you to generate Java code from the WSDL. Fill in the fields correctly as shown and click `Ok`:
+1. Create a new Web-Services Client Project. ![ws-client-project](/images/web-services-client.png)
+1. IntelliJ IDEA will offer you to generate Java code from the WSDL. Fill in the fields correctly as shown and click `Ok`:
    ![WSDL](/images/wsdl-gen.png)
 
 > Note: we will also try out another way of generating the Java code from the WSDL that is not IDE specific and uses the default JDK `wsimport` tool.
 
-4. The previous actions would trigger IntelliJ IDEA to generate some code for us:
+1. The previous actions would trigger IntelliJ IDEA to generate some code for us:
 
 ```java
 package example;
@@ -364,14 +405,14 @@ public class HelloWorldClient {
 }
 ```
 
-### Consume and Test Web-Service functions
+#### Consume and Test Web-Service functions
 
 We should adjust our project structure to look like folllowing:
 ![client-project-structure](/images/client-project-structure.png)
 
 Let's implement the consuming functions.
 
-#### luhnChecksum Implementation
+##### luhnChecksum Implementation
 
 ```java
     static void checksumTest(ws.MyWebService service) throws Exception {
@@ -396,7 +437,7 @@ Let's implement the consuming functions.
 }
 ```
 
-#### isPalindrome Implementation
+##### isPalindrome Implementation
 
 ```java
     static void palindromeTest(ws.MyWebService service) throws Exception {
@@ -419,7 +460,7 @@ Let's implement the consuming functions.
 }
 ```
 
-#### Quadratic Equation Solver Implementation
+##### Quadratic Equation Solver Implementation
 
 ```java
     static <T> boolean equal(List<T> a, List<T> b){
@@ -449,7 +490,7 @@ Let's implement the consuming functions.
     }
 ```
 
-### Main method
+#### Main method
 
 Our main method will trigger each function and catch any exceptions.
 
