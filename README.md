@@ -89,7 +89,8 @@ We will do the following things:
 * Install a Glassfish Server and make a basic setup.
 * Deploy our deployment artefact locally.
 * Create a client and bind it to a web-service consuming its functionality.
-* Write a simple test in order to test the system as a whole.
+* Create a client jar artifact.
+* Run the software and check it works correctly.
 
 ## Prerequisites
 
