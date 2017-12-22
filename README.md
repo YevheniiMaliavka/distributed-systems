@@ -589,7 +589,7 @@ Having everything set-up, we just run our client and expect to see the following
 
 ### Demo
 
-![Demo](/images/demo.gif)
+![Demo](/images/test.gif)
 
 ## Outro
 
