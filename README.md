@@ -2,8 +2,12 @@
 
 > This is just a simple guide on how to create a basic SOAP Web-Services infrustructure (Web Service and Web Service Client) using [Java API for XML Web-Service](https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services). This small tutorial is done as a part of a `Distributed Systems` project in the University of Applied Science Merseburg, is only for educational and version control purposes here. It does not implement best-practices and may contain mistakes.
 
+## Table of Contents
+
 * [Web-Service with JAX-WS. First blood](#web-service-with-jax-ws-first-blood)
+  * [Table of Contents](#table-of-contents)
   * [Quick Dive-In](#quick-dive-in)
+    * [Checkout the project](#checkout-the-project)
   * [Intro](#intro)
   * [What we are going to do](#what-we-are-going-to-do)
   * [Prerequisites](#prerequisites)
@@ -38,6 +42,9 @@
         * [isPalindrome Implementation](#ispalindrome-implementation)
         * [Quadratic Equation Solver Implementation](#quadratic-equation-solver-implementation)
       * [Main method](#main-method)
+      * [wsimport](#wsimport)
+    * [Create an artifact](#create-an-artifact)
+    * [Execute Client jar](#execute-client-jar)
   * [Test](#test)
   * [Outro](#outro)
 
@@ -46,6 +53,28 @@
 ## Quick Dive-In
 
 If you just want to have all the things here on your local machine running, try out instructions in this section and skip the other.
+
+### Checkout the project
+
+```sh
+git clone git@github.com:YevheniiMaliavka/distributed-systems.git
+```
+
+or [download a zip](https://github.com/YevheniiMaliavka/distributed-systems/archive/master.zip).
+
+Unzip the archive.
+
+An appropriate `app.war` WebService artifact can be found under `MyWebService/out/artifacts/app/`.
+
+The client `jar` artifact can be found under `MyWebServiceClient/out/artifacts/MyWebServiceClient_jar/`.
+
+Firstly, make sure your GlassFish server is running the Web-Service App, namely the `app.war`artifact. Follow the [Local Deployment](#local-deployment) instructions.
+
+Secondly, run the `MyWebServiceClient.jar`. Just navigate to the directorythat contains the artifact and run `java -jar MyWebServiceClient.jar`. [Execute Client jar](#execute-client-jar).
+
+Finally, you should see the appropriate result: [Test](#test).
+
+For more details, follow the complete guide bellow.
 
 ## Intro
 
@@ -83,8 +112,8 @@ I will use [Unix Bash](<https://en.wikipedia.org/wiki/Bash_(Unix_shell)>) and [I
 Make sure you have JDK installed:
 
 ```sh
-$sudo apt-get install openjdk-8-jdk
-$java -version
+sudo apt-get install openjdk-8-jdk
+java -version
 ```
 
 If you experience any problems, try out [this](https://tecadmin.net/install-oracle-java-8-ubuntu-via-ppa/) tutorial.
@@ -385,7 +414,7 @@ I have implemented a basic Java Client that does not provide any GUI interaction
 * Make sure your GlassFish server is running and executing our Web-Service App.
 * Create a new Web-Services Client Project. ![ws-client-project](/images/web-services-client.png)
 * IntelliJ IDEA will offer you to generate Java code from the WSDL. Fill in the fields correctly as shown and click `Ok`:
-   ![WSDL](/images/wsdl-gen.png)
+  ![WSDL](/images/wsdl-gen.png)
 
 > Note: we will also try out another way of generating the Java code from the WSDL that is not IDE specific and uses the default JDK `wsimport` tool.
 
@@ -514,6 +543,44 @@ Our main method will trigger each function and catch any exceptions.
     }
 ```
 
+#### wsimport
+
+Generate JAX-WS artifacts from the WSDL
+
+Run `wsimport` to generate JAX-WS artifacts (to put it simply, the classes you'll need to invoke the web service):
+
+```sh
+wsimport -keep -p ws http://localhost:8080/app/services/MyWebService?wsdl
+```
+
+About the options:
+
+* `-keep` is to keep generated .java sources (this is will ease the development)
+* `-p` is used to specify a package for the generated artifacts
+
+Read [StackOverflow Answer](https://stackoverflow.com/questions/4172118/web-service-client-given-wsdl) to get more info with example.
+
+### Create an artifact
+
+To make the running of the client IDE independent, we'll create a `jar` artifact.
+Navigate to `Project Structure -> Artifacts -> Click on Add + -> Select jar -> From modules and dependencies`.
+Specify the appropriate configuration and click `OK`.
+
+It looks like:
+![Client Jar](/images/client-jar.png)
+
+Simply go to `Build -> Build Artifacts` and build the appropriate artifact.
+This command generates an `MyWebServiceClient.jar` artifact under `/out/artifacts/MyWebServiceClient`.
+
+### Execute Client jar
+
+It's as simple as running the following command:
+
+```sh
+cd /out/artifacts/MyWebServiceClient_jar/
+java -jar MyWebServiceClient.jar
+```
+
 ## Test
 
 Having everything set-up, we just run our client and expect to see the following output:
@@ -522,6 +589,8 @@ Having everything set-up, we just run our client and expect to see the following
 ## Outro
 
 We are done here. We've got our simple Web-Service consumed by a Client using the SOAP with a Service Provider and Service Consumer.
+
+Thanks for your time!
 
 This guide was intended for my better understanding and is not to supposed to be the `to follow` one.
 
