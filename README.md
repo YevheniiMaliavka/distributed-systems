@@ -342,14 +342,14 @@ I have implemented a basic Java Client that does not provide any GUI interaction
 ### Instantiate a project
 
 1. Make sure your GlassFish server is running and executing our Web-Service App.
-1. Create a new Web-Services Client Project.
+2. Create a new Web-Services Client Project.
    ![ws-client-project](/images/web-services-client.png)
-1. IntelliJ IDEA will offer you to generate Java code from the WSDL. Fill in the fields correctly as shown and click `Ok`:
+3. IntelliJ IDEA will offer you to generate Java code from the WSDL. Fill in the fields correctly as shown and click `Ok`:
    ![WSDL](/images/wsdl-gen.png)
 
 > Note: we will also try out another way of generating the Java code from the WSDL that is not IDE specific and uses the default JDK `wsimport` tool.
 
-1. The previous actions would trigger IntelliJ IDEA to generate some code for us:
+4. The previous actions would trigger IntelliJ IDEA to generate some code for us:
 
 ```java
 package example;
