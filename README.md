@@ -52,11 +52,11 @@ If you experience any problems, try out [this](https://tecadmin.net/install-orac
 
 ### Create a project
 
-1. Start the IntelliJ IDEA and open the create a new project.
-1. Search for `JAVA EE`and check `WebServices`. Uncheck `Generate sample code`.
-   ![New Project](/images/new-project.png)
-1. Click `Next` and give a name to your project, say `MyWebService` and click `Finish`.
-   You should have the following ![Project Structure Tree](/images/project-structure.png)
+0. Start the IntelliJ IDEA and open the create a new project.
+1. Search for `JAVA EE`and check `WebServices`. Uncheck `Generate sample code`. ![New Project](/images/new-project.png)
+2. Click `Next` and give a name to your project, say `MyWebService` and click `Finish`.
+
+You should have the following ![Project Structure Tree](/images/project-structure.png)
 
 ### Implement a Web Service
 
@@ -218,19 +218,19 @@ Our deployment package will be running on a [GlassFish Application Server](https
 
 ### Server Setup
 
-1. Download the GlassFish 5 for Linux [here](https://javaee.github.io/glassfish/download). There are two possibilities, namely Web-Profile and Full-Platform. The first one should be sufficient for this tutorial, however I have used the Full-Platform.
-2. Unzip the archive.
-3. Navigate in terminal to the unzipped dir, e.g.`/glassfish5/bin`, where you can find the `asadmin` shell script. This one is used to start and control the server.
+    0. Download the GlassFish 5 for Linux [here](https://javaee.github.io/glassfish/download). There are two possibilities, namely Web-Profile and Full-Platform. The first one should be sufficient for this tutorial, however I have used the Full-Platform.
+    1. Unzip the archive.
+    2. Navigate in terminal to the unzipped dir, e.g.`/glassfish5/bin`, where you can find the `asadmin` shell script. This one is used to start and control the server.
 
 ### Deployment
 
-4. Start the default domain `domain1`
+0. Start the default domain `domain1`
 
 ```sh
 ./asadmin start-domain domain1
 ```
 
-5. Run deployment command
+1. Run deployment command
 
 ```sh
 ./asadmin deploy ~/src/distributed-systems/MyWebService/out/artifacts/app/app.war
@@ -342,8 +342,7 @@ I have implemented a basic Java Client that does not provide any GUI interaction
 ### Instantiate a project
 
 1. Make sure your GlassFish server is running and executing our Web-Service App.
-2. Create a new Web-Services Client Project.
-   ![ws-client-project](/images/web-services-client.png)
+2. Create a new Web-Services Client Project. ![ws-client-project](/images/web-services-client.png)
 3. IntelliJ IDEA will offer you to generate Java code from the WSDL. Fill in the fields correctly as shown and click `Ok`:
    ![WSDL](/images/wsdl-gen.png)
 
@@ -483,6 +482,6 @@ Having everything set-up, we just run our client and expect to see the following
 
 We are done here. We've got our simple Web-Service consumed by a Client using the SOAP with a Service Provider and Service Consumer.
 
-This guide was intended for my better understanding and is not to supposed to be the `to follow` one. 
+This guide was intended for my better understanding and is not to supposed to be the `to follow` one.
 
 If you've found some mistakes, got some ideas or suggestions on how to improve this simple guide, you are very welcome to make a PR or create an issue.
