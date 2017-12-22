@@ -587,6 +587,10 @@ java -jar MyWebServiceClient.jar
 Having everything set-up, we just run our client and expect to see the following output:
 ![Test](/images/final-test.png)
 
+### Demo
+
+![Demo](/images/demo.gif)
+
 ## Outro
 
 We are done here. We've got our simple Web-Service consumed by a Client using the SOAP with a Service Provider and Service Consumer.
