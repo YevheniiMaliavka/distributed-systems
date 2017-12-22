@@ -1,6 +1,6 @@
 # Web-Service with JAX-WS. First blood
 
-> This is just a simple guide on how to create a basic SOA infrustructure (Web Service and Web Service Client) using [Java API for XML Web-Service](https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services). This small tutorial is done as a part of a `Distributed Systems` project in the University of Applied Science Merseburg, is only for educational and version control purposes here. It does not implement best-practices and may contain mistakes.
+> This is just a simple guide on how to create a basic SOAP Web-Services infrustructure (Web Service and Web Service Client) using [Java API for XML Web-Service](https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services). This small tutorial is done as a part of a `Distributed Systems` project in the University of Applied Science Merseburg, is only for educational and version control purposes here. It does not implement best-practices and may contain mistakes.
 
 ## Quick Dive-In
 
