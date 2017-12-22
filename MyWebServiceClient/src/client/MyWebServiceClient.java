@@ -8,7 +8,7 @@ public class MyWebServiceClient {
 
     static void palindromeTest(ws.MyWebService service) throws Exception {
         String[] palindroms = {"A man, a plan, a canal, Panama!", "Was it a car or a cat I saw?", "No 'x' in Nixon"};
-        Exception ex = new Exception("Palendrome service is working incorrectly ¯\\_(ツ)_/¯");
+        Exception ex = new Exception("Palindrome service is working incorrectly ¯\\_(ツ)_/¯");
         for (String palindrom :
                 palindroms) {
             if (service.isPalindrome(palindrom)) {

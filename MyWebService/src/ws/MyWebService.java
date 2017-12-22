@@ -6,11 +6,11 @@ import javax.jws.WebMethod;
 @WebService
 public interface MyWebService {
     @WebMethod
-    boolean luhnChecksum(final long checksum);
+    boolean luhnChecksum(final String checksum);
 
     @WebMethod
     boolean isPalindrome(final String string);
 
     @WebMethod
-    int[] quadraticEquationSolve(final int a, final int b, final int c);
+    double[] quadraticEquationSolve(final int a, final int b, final int c);
 }
